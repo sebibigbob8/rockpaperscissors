@@ -25,7 +25,7 @@ scissorsEl.onclick = e => {
     gameStart('scissors');
 };
 
-let gameStart = (userChoice) => {
+let gameStart = async (userChoice) => {
     result = 0;
     let compChoice = Math.floor(Math.random() * 3) + 1;
     switch (compChoice) {
@@ -80,6 +80,30 @@ let gameStart = (userChoice) => {
         default:
             compChoice = null;
     }
+    await new Promise((resolve,reject) => {
+        let countdown = 1;
+        let interval;
+        console.log("start countdown:", countdown);
+        document.body.classList.add('shadow');
+        document.getElementById(`countainer`).style.display = 'none';
+        let calculate = () => {
+            if(countdown > 3){
+                document.getElementById(`countainer`).style.display = 'block';
+                document.getElementById(`countdown${countdown-1}`).style.display = 'none';;
+                document.body.classList.remove('shadow');
+                resolve('done!');
+                console.log("end countdown:", countdown);
+                clearInterval(interval);
+                return;
+            }
+            console.log('new Calculation');
+            if(document.getElementById(`countdown${countdown-1}`) != null)
+                document.getElementById(`countdown${countdown-1}`).style.display = 'none';
+            document.getElementById(`countdown${countdown}`).style.display = 'block';
+            countdown++;
+        };
+        interval = setInterval(calculate, 1000);
+    });
     switch (result) {
         case 1:
             userScore++;
@@ -98,6 +122,7 @@ let gameStart = (userChoice) => {
     scoreCompEl.innerText = compScore;
     scoreUserEl.innerText = userScore;
     console.log("Result: "+result);
+
 };
 
 

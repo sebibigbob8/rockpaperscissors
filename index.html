@@ -8,30 +8,38 @@
 <header>
     <h1>Rock Paper Scissors</h1>
 </header>
-<div class="score-board">
-    <div id="user-label" class="badge">user</div>
-    <div id="comp-label" class="badge">comp</div>
-    <span id="user-score">0</span>:<span id="comp-score">0</span>
+<div id="countdown">
+    <h1 id="countdown1">ROCK</h1>
+    <h1 id="countdown2">PAPER</h1>
+    <h1 id="countdown3">SCISSORS</h1>
 </div>
-<div class="result">
-    <p id="winText">Lets game</p>
-</div>
-<div class="choices">
-    <div id="r" class="choice">
-        <img src="img/rock.png">
+<div id="countainer">
+    <div class="score-board">
+        <div id="user-label" class="badge">user</div>
+        <div id="comp-label" class="badge">comp</div>
+        <span id="user-score">0</span>:<span id="comp-score">0</span>
     </div>
-    <div id="p" class="choice">
-        <img src="img/paper.png">
+    <div class="result">
+        <p id="winText">Lets game</p>
     </div>
-    <div id="s" class="choice">
-        <img src="img/scissors.png">
-    </div>
+    <div class="choices">
+        <div id="r" class="choice">
+            <img src="img/rock.png">
+        </div>
+        <div id="p" class="choice">
+            <img src="img/paper.png">
+        </div>
+        <div id="s" class="choice">
+            <img src="img/scissors.png">
+        </div>
 
+    </div>
+    <p id="actionMessage">Make your move.</p>
+    <script src="app.js" charset="utf-8"></script>
 </div>
-<p id="actionMessage">Make your move.</p>
-<script src="app.js" charset="utf-8"></script>
+
 </body>
-</html>
+
 <br>
 <br>
 <br>
@@ -40,3 +48,4 @@
         href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a
         href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
 </footer>
+</html>
