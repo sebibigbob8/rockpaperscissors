@@ -24,7 +24,10 @@ paperEl.onclick = e => {
 scissorsEl.onclick = e => {
     gameStart('scissors');
 };
-
+/**
+ * Game logic
+ * @param userChoice
+ */
 let gameStart = async (userChoice) => {
     result = 0;
     let compChoice = Math.floor(Math.random() * 3) + 1;
@@ -80,30 +83,7 @@ let gameStart = async (userChoice) => {
         default:
             compChoice = null;
     }
-    await new Promise((resolve,reject) => {
-        let countdown = 1;
-        let interval;
-        console.log("start countdown:", countdown);
-        document.body.classList.add('shadow');
-        document.getElementById(`countainer`).style.display = 'none';
-        let calculate = () => {
-            if(countdown > 3){
-                document.getElementById(`countainer`).style.display = 'block';
-                document.getElementById(`countdown${countdown-1}`).style.display = 'none';;
-                document.body.classList.remove('shadow');
-                resolve('done!');
-                console.log("end countdown:", countdown);
-                clearInterval(interval);
-                return;
-            }
-            console.log('new Calculation');
-            if(document.getElementById(`countdown${countdown-1}`) != null)
-                document.getElementById(`countdown${countdown-1}`).style.display = 'none';
-            document.getElementById(`countdown${countdown}`).style.display = 'block';
-            countdown++;
-        };
-        interval = setInterval(calculate, 1000);
-    });
+    await countdownCaller().then;
     switch (result) {
         case 1:
             userScore++;
@@ -114,15 +94,47 @@ let gameStart = async (userChoice) => {
             textScoreEl.innerText = "You LOOSE";
             break;
         case 3:
-            textScoreEl.innerText = "DRAW !"
+            textScoreEl.innerText = "DRAW !";
             break;
         default:
     }
     //Update score
     scoreCompEl.innerText = compScore;
     scoreUserEl.innerText = userScore;
-    console.log("Result: "+result);
+
 
 };
 
+/**
+ * Asynchronus code
+ * Promise wrap in a function. That way let us choose when the promise will be resolve.
+ * @returns {Promise<any>}
+ */
+function countdownCaller(){
+    return new Promise((resolve, reject) => {
+        let countdown = 1;
+        let interval;
+        document.body.classList.add('shadow');
+        document.getElementById(`countainer`).style.display = 'none';
+        let calculate = () => {
+            if (countdown > 3) {
+                document.getElementById(`countainer`).style.display = 'block';
+                document.getElementById(`countdown${countdown - 1}`).style.display = 'none';
+                document.body.classList.remove('shadow');
+                resolve('done!');
+                clearInterval(interval);
+                return;
+            }
+            if (document.getElementById(`countdown${countdown - 1}`) != null)
+                document.getElementById(`countdown${countdown - 1}`).style.display = 'none';
+            document.getElementById(`countdown${countdown}`).style.display = 'block';
+            countdown++;
+        };
+        interval = setInterval(calculate, 1000);
+    });
+}
+
+/*
+TODO: Add hands up and down effect during the countdown
+ */
 
