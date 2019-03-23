@@ -110,7 +110,7 @@ let gameStart = async (userChoice) => {
  * Promise wrap in a function. That way let us choose when the promise will be resolve.
  * @returns {Promise<any>}
  */
-function countdownCaller(){
+function countdownCaller() {
     return new Promise((resolve, reject) => {
         let countdown = 1;
         let interval;
@@ -122,6 +122,7 @@ function countdownCaller(){
                 document.getElementById(`countdown${countdown - 1}`).style.display = 'none';
                 document.body.classList.remove('shadow');
                 resolve('done!');
+                document.getElementById("fistImg").style.display = 'none';
                 clearInterval(interval);
                 return;
             }
@@ -129,12 +130,31 @@ function countdownCaller(){
                 document.getElementById(`countdown${countdown - 1}`).style.display = 'none';
             document.getElementById(`countdown${countdown}`).style.display = 'block';
             countdown++;
+            fistMove();
         };
-        interval = setInterval(calculate, 1000);
+        interval = setInterval(calculate, 800);
     });
 }
 
-/*
-TODO: Add hands up and down effect during the countdown
- */
+function fistMove() {
+    const elem = document.getElementById("fistImg");
+    const id = setInterval(frame, 5);
+    let top = 0;
+    let rotate = 70;
+    elem.style.display = 'block';
+
+    function frame() {
+        if (top === 100) {
+            top = 0;
+            elem.style.top = top + 'px';
+            clearInterval(id);
+        }
+        top++;
+        rotate = rotate - 0.8;
+        elem.style.top = top + 'px';
+        elem.style.transform = `rotate(${rotate}deg)`
+
+    }
+}
+//TODO: Add animation like "Paper VS Scissors --> Scissors win"
 

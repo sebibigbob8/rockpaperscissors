@@ -108,3 +108,15 @@ footer{
     position: absolute;
     bottom: 0;
 }
+#fistAnim {
+    position: relative;
+    --fistWidth: 300px;
+}
+#fistAnim > img{
+
+    position: absolute;
+    width: var(--fistWidth);
+    right: 45%;
+    transform: rotate(70deg);
+    display: none;
+}
